@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include olimpusgym *.css
+recursive-include olimpusgym *.csv
+recursive-include olimpusgym *.html
+recursive-include olimpusgym *.ico
+recursive-include olimpusgym *.js
+recursive-include olimpusgym *.json
+recursive-include olimpusgym *.md
+recursive-include olimpusgym *.png
+recursive-include olimpusgym *.py
+recursive-include olimpusgym *.svg
+recursive-include olimpusgym *.txt
+recursive-exclude olimpusgym *.pyc

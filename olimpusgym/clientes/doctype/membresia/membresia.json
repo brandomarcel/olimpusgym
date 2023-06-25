@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-25 00:46:38.060689",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tipo_membresia",
+  "fecha_inicio",
+  "fecha_fin",
+  "valor"
+ ],
+ "fields": [
+  {
+   "fieldname": "tipo_membresia",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipo de Membres\u00eda",
+   "options": "Mensual\nTrimestral\nSemestral\nAnual",
+   "reqd": 1
+  },
+  {
+   "default": "25",
+   "fieldname": "valor",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Valor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_inicio",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha Inicio",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fecha_fin",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Fecha Fin",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-25 00:53:03.808760",
+ "modified_by": "Administrator",
+ "module": "Clientes",
+ "name": "Membresia",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

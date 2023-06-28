@@ -18,7 +18,9 @@
   "identificador",
   "membresia_column",
   "membresia",
-  "nombres_completos"
+  "nombres_completos",
+  "column_break_ocuqn",
+  "pesos"
  ],
  "fields": [
   {
@@ -33,7 +35,8 @@
   {
    "fieldname": "nombres",
    "fieldtype": "Data",
-   "label": "Nombres"
+   "label": "Nombres",
+   "reqd": 1
   },
   {
    "fieldname": "correo",
@@ -43,7 +46,8 @@
   {
    "fieldname": "celular",
    "fieldtype": "Data",
-   "label": "Celular"
+   "label": "Celular",
+   "reqd": 1
   },
   {
    "fieldname": "estado",
@@ -75,7 +79,8 @@
   {
    "fieldname": "apellidos",
    "fieldtype": "Data",
-   "label": "Apellidos"
+   "label": "Apellidos",
+   "reqd": 1
   },
   {
    "fieldname": "apodo",
@@ -92,11 +97,21 @@
    "in_standard_filter": 1,
    "label": "Nombres Completos",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ocuqn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pesos",
+   "fieldtype": "Table",
+   "label": "Peso y Altura",
+   "options": "Pesos"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-25 01:17:22.388719",
+ "modified": "2023-06-27 16:49:35.208540",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Cliente",

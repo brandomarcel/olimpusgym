@@ -12,13 +12,30 @@
  "is_default": 0,
  "is_standard": 1,
  "label": "Clientes",
- "links": [],
- "modified": "2023-06-24 23:51:25.292617",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lista Clientes",
+   "link_to": "Cliente",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-06-25 10:54:18.516734",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Clientes",
  "owner": "Administrator",
  "pin_to_bottom": 0,
  "pin_to_top": 0,
- "shortcuts": []
+ "shortcuts": [
+  {
+   "doc_view": "New",
+   "label": "Crear Cliente",
+   "link_to": "Cliente",
+   "type": "DocType"
+  }
+ ]
 }

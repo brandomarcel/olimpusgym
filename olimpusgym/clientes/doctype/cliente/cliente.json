@@ -11,6 +11,7 @@
   "nombres",
   "apellidos",
   "correo",
+  "fecha_registro",
   "column_break_1fbwp",
   "celular",
   "apodo",
@@ -20,7 +21,8 @@
   "membresia",
   "nombres_completos",
   "column_break_ocuqn",
-  "pesos"
+  "pesos",
+  "genero"
  ],
  "fields": [
   {
@@ -107,11 +109,22 @@
    "fieldtype": "Table",
    "label": "Peso y Altura",
    "options": "Pesos"
+  },
+  {
+   "fieldname": "fecha_registro",
+   "fieldtype": "Data",
+   "label": "Fecha Registro"
+  },
+  {
+   "fieldname": "genero",
+   "fieldtype": "Select",
+   "label": "Genero",
+   "options": "Masculino\nFemenino"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-27 16:49:35.208540",
+ "modified": "2023-06-30 23:42:28.608118",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Cliente",

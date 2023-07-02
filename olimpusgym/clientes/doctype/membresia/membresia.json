@@ -9,7 +9,8 @@
   "tipo_membresia",
   "fecha_inicio",
   "fecha_fin",
-  "valor"
+  "valor",
+  "estado"
  ],
  "fields": [
   {
@@ -41,12 +42,18 @@
    "in_list_view": 1,
    "label": "Fecha Fin",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "estado",
+   "fieldtype": "Check",
+   "label": "Estado"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-25 00:53:03.808760",
+ "modified": "2023-06-30 17:52:01.022241",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Membresia",

@@ -44,10 +44,42 @@ def detalleCliente(name):
     return frappe.db.sql(sql, as_dict=True)
 
 
-@frappe.whitelist(allow_guest=True)
+""" @frappe.whitelist(allow_guest=True)
 def borrarCliente(name):
     try:
         sql = "delete from tabCliente where name = '{0}'".format(name)
+        frappe.db.sql(sql, as_dict=True)
+        retorno = {
+            "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
+    return retorno """
+
+@frappe.whitelist(allow_guest=True)
+def borrarCliente(name):
+    try:
+        frappe.delete_doc('Cliente', name,ignore_permissions=True)
+        retorno = {
+            "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
+    return retorno
+
+
+
+@frappe.whitelist(allow_guest=True)
+def estadoCliente(name):
+    try:
+        sql = """update tabCliente set  estado='Inactivo'
+                where name = '{0}'""".format(name, )
         frappe.db.sql(sql, as_dict=True)
         retorno = {
             "estado": 'Exito',
@@ -142,8 +174,22 @@ def crearMembresia(datos):
 
     return retorno
 
+@frappe.whitelist(allow_guest=True)
+def deleteMembresia(name):
+    try:
+        sql = "delete from tabMembresia where name = '{0}'".format(name)
+        frappe.db.sql(sql, as_dict=True)
+        retorno = {
+            "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
+    return retorno
 
-# MEMBRESIAS
+# PESOS
 
 @frappe.whitelist(allow_guest=True)
 def createPeso(datos):

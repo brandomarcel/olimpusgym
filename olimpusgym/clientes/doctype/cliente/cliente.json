@@ -28,6 +28,8 @@
   {
    "fieldname": "cedula",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Cedula",
    "unique": 1
   },
@@ -121,7 +123,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-03 21:27:18.166908",
+ "modified": "2023-07-04 17:32:02.164378",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Cliente",

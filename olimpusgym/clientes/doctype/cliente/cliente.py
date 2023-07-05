@@ -34,7 +34,7 @@ def updateCliente(datos):
 
 @frappe.whitelist(allow_guest=True)
 def getClientes():
-    sql = "select * from tabCliente order by fecha_registro DESC"
+    sql = "select * from tabCliente order by creation DESC"
     return frappe.db.sql(sql, as_dict=True)
 
 
@@ -110,7 +110,7 @@ def crearCliente(datos):
         cliente.append("membresia", {"fecha_inicio": datos["fecha_inicio"],
                                      "fecha_fin": datos["fecha_fin"],
                                      "tipo_membresia": datos["tipo_membresia"],
-                                     "valor": datos["valor"]
+                                     "valor": datos["valor"],"tipo_pago": datos["tipo_pago"]
                                      })
 
         # Peso y Altura
@@ -140,9 +140,9 @@ def crearCliente(datos):
 
 @frappe.whitelist(allow_guest=True)
 def getMembresias():
-    sql = """select tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos from tabMembresia tm  
+    sql = """select tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago from tabMembresia tm  
 inner join tabCliente tc on tm.parent = tc.name 
-order by fecha_inicio DESC"""
+order by tm.creation DESC"""
     return frappe.db.sql(sql, as_dict=True)
 
 
@@ -153,12 +153,12 @@ def crearMembresia(datos):
         membresia = frappe.new_doc("Membresia")
         membresia.parent = datos["cliente"]
         membresia.parentfield = 'membresia'
-        membresia.parenttype = 'membresia'
+        membresia.parenttype = 'Cliente'
         membresia.fecha_inicio = datos["fecha_inicio"]
         membresia.fecha_fin = datos["fecha_fin"]
         membresia.tipo_membresia = datos["tipo_membresia"]
         membresia.valor = datos["valor"]
-        
+        membresia.tipo_pago = datos["tipo_pago"]
        
 
         membresia.insert(ignore_permissions=True)

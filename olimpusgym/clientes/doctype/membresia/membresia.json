@@ -10,7 +10,8 @@
   "fecha_inicio",
   "fecha_fin",
   "valor",
-  "estado"
+  "estado",
+  "tipo_pago"
  ],
  "fields": [
   {
@@ -48,12 +49,17 @@
    "fieldname": "estado",
    "fieldtype": "Check",
    "label": "Estado"
+  },
+  {
+   "fieldname": "tipo_pago",
+   "fieldtype": "Data",
+   "label": "Tipo Pago"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-30 17:52:01.022241",
+ "modified": "2023-07-04 18:21:29.643135",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Membresia",

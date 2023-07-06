@@ -37,6 +37,11 @@ def getClientes():
     sql = "select * from tabCliente order by creation DESC"
     return frappe.db.sql(sql, as_dict=True)
 
+@frappe.whitelist(allow_guest=True)
+def getAlldetalleClientes(name):
+    doc = frappe.get_doc("Cliente", name, load_children=True)
+    return doc
+
 
 @frappe.whitelist(allow_guest=True)
 def detalleCliente(name):
@@ -110,7 +115,8 @@ def crearCliente(datos):
         cliente.append("membresia", {"fecha_inicio": datos["fecha_inicio"],
                                      "fecha_fin": datos["fecha_fin"],
                                      "tipo_membresia": datos["tipo_membresia"],
-                                     "valor": datos["valor"],"tipo_pago": datos["tipo_pago"]
+                                     "valor": datos["valor"],"tipo_pago": datos["tipo_pago"],
+                                     "estado": 1
                                      })
 
         # Peso y Altura
@@ -159,6 +165,7 @@ def crearMembresia(datos):
         membresia.tipo_membresia = datos["tipo_membresia"]
         membresia.valor = datos["valor"]
         membresia.tipo_pago = datos["tipo_pago"]
+        membresia.estado = 1
        
 
         membresia.insert(ignore_permissions=True)
@@ -220,6 +227,21 @@ def createPeso(datos):
             "mensajeError": e
         }
 
+    return retorno
+
+@frappe.whitelist(allow_guest=True)
+def deletePeso(name):
+    try:
+        sql = "delete from tabPesos where name = '{0}'".format(name)
+        frappe.db.sql(sql, as_dict=True)
+        retorno = {
+            "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
     return retorno
 
 

@@ -1,10 +1,12 @@
 # Copyright (c) 2023, Brando Cevallos and contributors
 # For license information, please see license.txt
 
+import base64
 import frappe
+import qrcode
 from datetime import date, datetime
 from frappe.model.document import Document
-
+import pyqrcode
 
 @frappe.whitelist(allow_guest=True)
 def updateCliente(datos):
@@ -243,6 +245,27 @@ def deletePeso(name):
             "mensajeError": e
         }
     return retorno
+
+
+@frappe.whitelist(allow_guest=True)
+def generarQR():
+    qr = qrcode.QRCode(version=1, box_size=10, border=5)
+    qr.add_data("CLI-2023-1722195755")
+    url = pyqrcode.create("CLI-2023-1722195755", error='H', version=2)
+    image_as_str = url.png_as_base64_str(scale=2, background=None, quiet_zone=4)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+    img.save("CLI-2023-1722195755.png")
+    with open("CLI-2023-1722195755.png", "rb") as image_file:
+        try:
+            formato = base64.b64encode(image_file.read())
+            encoded_string =("La imagen está en formato Base64")
+        except:
+             encoded_string =("La imagen no está en formato Base64")
+       
+    return {'encoded_string':encoded_string,
+            'formato':formato,
+            'image_as_str':image_as_str}
 
 
 

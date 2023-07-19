@@ -147,8 +147,15 @@ def crearCliente(datos):
 
 
 @frappe.whitelist(allow_guest=True)
-def getMembresias():
-    sql = """select tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago from tabMembresia tm  
+def getMembresias(todos):
+    if todos:
+        sql="""SELECT tm.name,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago, MAX(tm.fecha_fin) AS fecha_fin
+FROM tabMembresia tm inner join tabCliente tc on tm.parent = tc.name 
+GROUP BY tm.parent
+order by tm.creation DESC """
+    else:
+
+        sql = """select tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago from tabMembresia tm  
 inner join tabCliente tc on tm.parent = tc.name 
 order by tm.creation DESC"""
     return frappe.db.sql(sql, as_dict=True)

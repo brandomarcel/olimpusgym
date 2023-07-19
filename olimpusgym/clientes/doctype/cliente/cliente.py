@@ -257,13 +257,13 @@ def deletePeso(name):
 @frappe.whitelist(allow_guest=True)
 def generarQR():
     qr = qrcode.QRCode(version=1, box_size=10, border=5)
-    qr.add_data("CLI-2023-1722195755")
-    url = pyqrcode.create("CLI-2023-1722195755", error='H', version=2)
+    qr.add_data("CLI-2023-0504424987")
+    url = pyqrcode.create("CLI-2023-0504424987", error='H', version=2)
     image_as_str = url.png_as_base64_str(scale=2, background=None, quiet_zone=4)
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
-    img.save("CLI-2023-1722195755.png")
-    with open("CLI-2023-1722195755.png", "rb") as image_file:
+    img.save("CLI-2023-0504424987.png")
+    with open("CLI-2023-0504424987.png", "rb") as image_file:
         try:
             formato = base64.b64encode(image_file.read())
             encoded_string =("La imagen está en formato Base64")

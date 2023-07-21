@@ -149,13 +149,17 @@ def crearCliente(datos):
 @frappe.whitelist(allow_guest=True)
 def getMembresias(todos):
     if todos:
-        sql="""SELECT tm.name,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago, MAX(tm.fecha_fin) AS fecha_fin
-FROM tabMembresia tm inner join tabCliente tc on tm.parent = tc.name 
-GROUP BY tm.parent
-order by tm.creation DESC """
+        sql="""SELECT tm.creation, tm.name,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago, tm.fecha_fin AS fecha_fin
+FROM tabMembresia tm
+inner join tabCliente tc on tm.parent = tc.name 
+INNER JOIN (
+  SELECT parent, MAX(fecha_fin) AS max_fecha_fin
+  FROM tabMembresia
+  GROUP BY parent) subquery ON tm.parent = subquery.parent AND tm.fecha_fin = subquery.max_fecha_fin
+  order by tm.creation DESC"""
     else:
 
-        sql = """select tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago from tabMembresia tm  
+        sql = """select tm.creation, tm.name,tm.fecha_fin,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago from tabMembresia tm  
 inner join tabCliente tc on tm.parent = tc.name 
 order by tm.creation DESC"""
     return frappe.db.sql(sql, as_dict=True)

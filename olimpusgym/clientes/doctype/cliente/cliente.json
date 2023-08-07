@@ -22,7 +22,9 @@
   "nombres_completos",
   "column_break_ocuqn",
   "pesos",
-  "genero"
+  "genero",
+  "codigoqr",
+  "fecha_nac"
  ],
  "fields": [
   {
@@ -119,11 +121,21 @@
    "fieldtype": "Select",
    "label": "Genero",
    "options": "Masculino\nFemenino"
+  },
+  {
+   "fieldname": "codigoqr",
+   "fieldtype": "Text",
+   "label": "QR"
+  },
+  {
+   "fieldname": "fecha_nac",
+   "fieldtype": "Data",
+   "label": "Fecha Nacimiento"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 17:32:02.164378",
+ "modified": "2023-07-28 18:39:08.636308",
  "modified_by": "Administrator",
  "module": "Clientes",
  "name": "Cliente",

@@ -18,10 +18,11 @@ def updateCliente(datos):
                                         celular='{5}',
                                         correo='{6}',
                                         nombres_completos='{7}',
-                                        genero='{8}'
+                                        genero='{8}',
+                                        fecha_nac='{9}'
                 where name = '{0}'""".format(datos["name"], datos["cedula"], datos["nombres"],
                                              datos["apellidos"], datos["apodo"], datos["celular"], datos["correo"],
-                                             (datos["nombres"] + ' ' + datos["apellidos"]),datos["genero"])
+                                             (datos["nombres"] + ' ' + datos["apellidos"]),datos["genero"],datos["fecha_nac"])
         frappe.db.sql(sql, as_dict=True)
         retorno = {
             "estado": 'Exito',
@@ -86,10 +87,36 @@ def borrarCliente(name):
 def estadoCliente(name):
     try:
         sql = """update tabCliente set  estado='Inactivo'
-                where name = '{0}'""".format(name, )
+                where name = '{0}'""".format(name)
         frappe.db.sql(sql, as_dict=True)
         retorno = {
             "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
+    return retorno
+
+
+#ASITENCIA
+@frappe.whitelist(allow_guest=True)
+def getAsitencia(name):
+    try:
+        sql = """SELECT tm.creation, tm.name,tm.fecha_inicio,tm.tipo_membresia,tm.valor,tm.estado,tc.nombres_completos,tm.tipo_pago, tm.fecha_fin AS fecha_fin
+FROM tabMembresia tm
+inner join tabCliente tc on tm.parent = tc.name 
+INNER JOIN (
+  SELECT parent, MAX(fecha_fin) AS max_fecha_fin
+  FROM tabMembresia
+  GROUP BY parent) subquery ON tm.parent = subquery.parent AND tm.fecha_fin = subquery.max_fecha_fin
+  where tc.name = '{0}'
+  order by tm.creation DESC """.format(name)
+        respuesta=frappe.db.sql(sql, as_dict=True)
+        retorno = {
+            "estado": 'Exito',
+            "user": respuesta,
         }
     except Exception as e:
         retorno = {
@@ -112,6 +139,7 @@ def crearCliente(datos):
         cliente.correo = datos["correo"]
         cliente.fecha_registro = datos["fecha_registro"]
         cliente.genero = datos["genero"]
+        cliente.fecha_nac = datos["fecha_nac"]
 
         # Membresia
         cliente.append("membresia", {"fecha_inicio": datos["fecha_inicio"],
@@ -131,6 +159,7 @@ def crearCliente(datos):
                                  })
 
         cliente.insert(ignore_permissions=True)
+        generarQR(cliente.name)
         retorno = {
             "estado": 'Exito',
             "cliente": cliente.name
@@ -277,6 +306,27 @@ def generarQR():
     return {'encoded_string':encoded_string,
             'formato':formato,
             'image_as_str':image_as_str} """
+
+@frappe.whitelist(allow_guest=True)
+def generarQR(name):
+    url = pyqrcode.create(name, error='H', version=2)
+    image_as_str = url.png_as_base64_str(scale=7, background=None, quiet_zone=4)
+    
+    try:
+        sql = """update tabCliente set  codigoqr = '{0}'
+                where name = '{1}'""".format(image_as_str,name)
+        frappe.db.sql(sql, as_dict=True)
+        retorno = {
+            "estado": 'Exito',
+        }
+    except Exception as e:
+        retorno = {
+            "estado": 'Error',
+            "mensajeError": e
+        }
+    return retorno
+       
+    return {'image_as_str':image_as_str}
 
 
 

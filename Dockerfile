@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y redis-server
 
-RUN apt-get install python3.7
+# RUN apt-get install python3.7
 
 # Restaura el usuario predeterminado
 USER frappe  

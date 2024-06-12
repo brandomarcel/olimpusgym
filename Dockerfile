@@ -21,11 +21,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
-# Restaura el usuario predeterminado
-USER Administrator  
-# Cambia a tu usuario predeterminado
-
-
 
 # Copia los archivos necesarios para Frappe
 COPY . .

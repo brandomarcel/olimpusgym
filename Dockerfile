@@ -5,11 +5,10 @@ FROM frappe/bench:latest
 WORKDIR /home/frappe/frappe-bench
 
 # Actualiza el sistema y las dependencias necesarias
-RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    vim \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y curl git vim
+RUN rm -rf /var/lib/apt/lists/*
+
 
 # Copia los archivos necesarios para Frappe
 COPY . .

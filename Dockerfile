@@ -35,6 +35,11 @@ RUN pip3 install -r requirements.txt
 # Instala la herramienta Bench
 RUN pip3 install frappe-bench
 # Inicializa el sitio de Frappe
+
+RUN apt-get update && \
+    apt-get install -y redis-server
+
+    
 RUN bench init --frappe-branch version-13 frappe-bench
 WORKDIR /home/frappe/frappe-bench/sites
 RUN bench new-site olimpus_gym --mariadb-root-password root --admin-password admin

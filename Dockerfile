@@ -8,7 +8,8 @@ WORKDIR /home/frappe/frappe-bench
 
 
 # Actualiza el sistema y las dependencias necesarias
-USER root  # Cambia al usuario root para ejecutar los comandos como root
+USER root  
+# Cambia al usuario root para ejecutar los comandos como root
 
 # Actualiza el sistema y las dependencias necesarias
 RUN apt-get update && \

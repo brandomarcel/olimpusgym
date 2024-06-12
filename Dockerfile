@@ -23,8 +23,8 @@ WORKDIR /home/frappe/frappe-bench/sites
 RUN bench new-site olimpus_gym --mariadb-root-password root --admin-password admin
 
 # Instala ERPNext versión 13
-RUN bench get-app erpnext --branch version-13
-RUN bench --site mysite.local install-app erpnext
+# RUN bench get-app erpnext --branch version-13
+# RUN bench --site mysite.local install-app erpnext
 
 # Expone el puerto en el que la aplicación escuchará
 EXPOSE 8000

@@ -24,7 +24,6 @@ RUN apt-get update && \
     apt-get install -y redis-server
 
 # RUN apt-get install python3.7
-RUN python -m pip install frappe==<un-yanked-version>
 
 # Restaura el usuario predeterminado
 USER frappe  

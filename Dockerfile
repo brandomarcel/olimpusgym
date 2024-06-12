@@ -22,7 +22,8 @@ RUN apt-get update && \
 
 
 # Restaura el usuario predeterminado
-USER Administrator  # Cambia a tu usuario predeterminado
+USER Administrator  
+# Cambia a tu usuario predeterminado
 
 
 

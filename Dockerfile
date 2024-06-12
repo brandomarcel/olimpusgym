@@ -1,5 +1,5 @@
 # Usa una imagen base oficial de Frappe para la versión 13
-FROM frappe/bench:version-13
+FROM frappe/bench:latest
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /home/frappe/frappe-bench

@@ -1,7 +1,7 @@
 
 
 # Usa una imagen base oficial de Frappe para la versión 13
-FROM frappe/bench:latest
+FROM frappe/bench:version-13
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /home/frappe/frappe-bench
@@ -24,6 +24,7 @@ RUN apt-get update && \
     apt-get install -y redis-server
 
 # RUN apt-get install python3.7
+RUN python -m pip install frappe==<un-yanked-version>
 
 # Restaura el usuario predeterminado
 USER frappe  

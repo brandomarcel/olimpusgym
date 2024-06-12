@@ -28,6 +28,9 @@ COPY . .
 # Instala las dependencias de Frappe
 RUN pip3 install -r requirements.txt
 
+# Instala la herramienta Bench
+RUN pip3 install frappe-bench
+
 # Inicializa el sitio de Frappe
 RUN bench init --frappe-branch version-13 frappe-bench
 WORKDIR /home/frappe/frappe-bench/sites

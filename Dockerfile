@@ -7,15 +7,20 @@ FROM frappe/bench:latest
 WORKDIR /home/frappe/frappe-bench
 
 
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get update
-
-
 # Actualiza el sistema y las dependencias necesarias
-RUN apt-get update
-RUN apt-get install -y curl git vim
-RUN rm -rf /var/lib/apt/lists/*
+USER root  # Cambia al usuario root para ejecutar los comandos como root
+
+RUN apt-get update && \
+    apt-get install -y sudo && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    sudo apt-get clean && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+# Restaura el usuario predeterminado
+USER Administrator  # Cambia a tu usuario predeterminado
+
 
 
 # Copia los archivos necesarios para Frappe

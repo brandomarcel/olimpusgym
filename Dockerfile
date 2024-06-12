@@ -24,7 +24,7 @@ RUN apt-get update && \
     apt-get install -y redis-server
 
 # RUN apt-get install python3.7
-
+RUN python -m pip install frappe==3.7.0
 # Restaura el usuario predeterminado
 USER frappe  
 # Cambia a tu usuario predeterminado

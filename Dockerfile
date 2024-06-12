@@ -21,16 +21,19 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 
+# Restaura el usuario predeterminado
+USER frappe  
+# Cambia a tu usuario predeterminado
+
+
 
 # Copia los archivos necesarios para Frappe
 COPY . .
 
 # Instala las dependencias de Frappe
 RUN pip3 install -r requirements.txt
-
 # Instala la herramienta Bench
 RUN pip3 install frappe-bench
-
 # Inicializa el sitio de Frappe
 RUN bench init --frappe-branch version-13 frappe-bench
 WORKDIR /home/frappe/frappe-bench/sites

@@ -22,6 +22,8 @@ RUN apt-get update && \
 
 RUN apt-get update && \
     apt-get install -y redis-server
+
+RUN apt-get install python3.8
 # Restaura el usuario predeterminado
 USER frappe  
 # Cambia a tu usuario predeterminado
@@ -36,7 +38,7 @@ RUN pip3 install -r requirements.txt
 # Instala la herramienta Bench
 RUN pip3 install frappe-bench
 # Inicializa el sitio de Frappe
-RUN apt-get install python3.8
+
 
 
 

@@ -20,7 +20,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-
+RUN apt-get update && \
+    apt-get install -y redis-server
 # Restaura el usuario predeterminado
 USER frappe  
 # Cambia a tu usuario predeterminado
@@ -36,10 +37,9 @@ RUN pip3 install -r requirements.txt
 RUN pip3 install frappe-bench
 # Inicializa el sitio de Frappe
 
-RUN apt-get update && \
-    apt-get install -y redis-server
 
-    
+
+
 RUN bench init --frappe-branch version-13 frappe-bench
 WORKDIR /home/frappe/frappe-bench/sites
 RUN bench new-site olimpus_gym --mariadb-root-password root --admin-password admin

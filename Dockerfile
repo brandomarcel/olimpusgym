@@ -36,7 +36,7 @@ RUN pip3 install -r requirements.txt
 # Instala la herramienta Bench
 RUN pip3 install frappe-bench
 # Inicializa el sitio de Frappe
-
+RUN apt-get install python3.8
 
 
 
